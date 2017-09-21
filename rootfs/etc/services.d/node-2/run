@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "* Starting node Node-2 ..."
+
+/usr/bin/geth --testnet --rpc --rpcaddr "0.0.0.0" --rpcport "8546" --port "30304" --rpccorsdomain "*" \
+--fast --cache=2048 \
+--unlock "0xe6145260489fec69a32b1fb1588ec1fb835c5681" --password /data/pw.txt \
+--datadir "/data/node-2" --rpcapi "db,eth,net,web3,admin,personal"
+
+s6-svc -d /var/run/s6/services/node-bob

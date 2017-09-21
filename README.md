@@ -1,27 +1,26 @@
-## Ethereum single-node public testnet
+## Ethereum two-node public testnet
 
 - RPC Port 16001, Username: user, Password: pass
 
 ### Addresses
 
-- Pool: 0x0942e9144606ad43f2e61a7ee332fe9914424712
+- Node 1: 0x0942e9144606ad43f2e61a7ee332fe9914424712
+- Node 2: 0xe6145260489fec69a32b1fb1588ec1fb835c5681
 
 ### To run this image with internal ports exposed at host:
 
 ```bash
-docker run -it -d -p 8545:8545 coinfoundry/ethereum-public-testnet
+docker run -it -d -p 8545:8545 -p 8546:8546 coinfoundry/ethereum-public-testnet
 ```
 
-### Generating blocks:
+### Example RPC Node 1:
 
 ```bash
-docker exec -i -t <container_id> /usr/bin/bitcoin-cli -datadir=/data/node-pool generate 1
+curl --data-binary '{"jsonrpc": "2.0", "id":"1", "method": "net_peerCount", "params": [] }' -H 'content-type: application/json' -X POST http://127.0.0.1:8545
 ```
 
-### Example RPC against Node-Pool:
+### Example RPC Node 2:
 
 ```bash
-curl --user user:pass --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getinfo", "params": [] }' -H 'content-type: application/json;' http://127.0.0.1:16001/
+curl --data-binary '{"jsonrpc": "2.0", "id":"1", "method": "net_peerCount", "params": [] }' -H 'content-type: application/json' -X POST http://127.0.0.1:8546
 ```
-
-# enode://6039b6518cd7d311587159742f3300c9f9a03947b5fa18e9b4837f6a27e5460c9e1c8bf79e04c00461ffc7e70fa833d048e0e6ee5cf35c913a8e480ee4cfe760@[::]:30304?discport=0

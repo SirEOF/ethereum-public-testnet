@@ -12,7 +12,7 @@ RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C / && \
     apt-get install -y --no-install-recommends ethereum && \
     rm -rf /usr/share/man/* /usr/share/groff/* /usr/share/info/* /var/cache/man/* /tmp/* /var/lib/apt/lists/*
 
-EXPOSE 8545
+EXPOSE 8545 8546
 
 ENTRYPOINT ["/init"]
 VOLUME ["/data"]
